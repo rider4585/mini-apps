@@ -15,6 +15,10 @@ yarn-debug.log*
 yarn-error.log*
 .idea/
 
+# Real timesheet exports — contain name, employee code, manager and hours. Never commit.
+*.xlsx
+!sample*.xlsx
+
 # Local office / agent coordination & vector store
 hive/
 palace/
