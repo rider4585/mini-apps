@@ -1,8 +1,9 @@
 {
-  "project": "DSR Mail Generator",
+  "project": "mini-apps",
   "root": "/Applications/MAMP/htdocs/Personal Projects/Status Mail Generator",
-  "app_dir": "app",
-  "updated_at": "2026-09-24",
+  "app_dir": "apps",
+  "updated_at": "2026-09-29",
+  "_note": "SUPERSEDED. This file records the original flat-app build (SMG T01-T08, all complete). The live board is `hive/tasks.json` (cards SMG-*). After the npm-workspaces restructure the source lives in `apps/` + `shared/`, not `app/`, and the app no longer uses state-based routing. Kept for history only — do not add work here.",
   "tasks": [
     {
       "id": "T01",
@@ -69,7 +70,7 @@
   "decisions": [
     "Storage: localStorage (simple, synchronous, sufficient for text-sized data).",
     "Excel generation: xlsx-js-style for styled output (SheetJS community drops styles).",
-    "Navigation: lightweight state-based routing (no react-router) - two pages.",
+    "Navigation: hand-rolled manifest-driven path router (no react-router). Superseded the earlier state-based switching; see hive/board.md.",
     "Reminder scheduling: self-rescheduling computed events persisted in localStorage, Notifications API, plus .ics import for phone."
   ]
 }
