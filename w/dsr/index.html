@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <title>Daily Status Report</title>
+    <script>
+      window.__wweb2JsWidgetTitle = function () {
+        return "Daily Status Report";
+      };
+      (function () {
+        try {
+          var t = localStorage.getItem("dsr-mg:theme");
+          if (!t || (t !== "dark" && t !== "light")) {
+            t = window.matchMedia("(prefers-color-scheme: dark)").matches
+              ? "dark"
+              : "light";
+          }
+          if (t === "dark") {
+            document.documentElement.classList.add("dark");
+            document.documentElement.style.colorScheme = "dark";
+          }
+        } catch (e) {}
+      })();
+    </script>
+    <style>
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        -webkit-tap-highlight-color: transparent;
+      }
+      #root {
+        width: 100%;
+        height: 100%;
+      }
+    </style>
+  </head>
+  <body class="bg-background text-foreground antialiased">
+    <div id="root"></div>
+    <script type="module" src="/apps/widget-dsr/src/main.jsx"></script>
+  </body>
+</html>

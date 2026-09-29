@@ -6,6 +6,17 @@ import { VitePWA } from "vite-plugin-pwa";
 export default defineConfig({
   plugins: [
     react(),
+    {
+      name: "widget-dev-rewrite",
+      configureServer(server) {
+        server.middlewares.use((req, res, next) => {
+          if (req.url === "/w/dsr") {
+            req.url = "/w/dsr/";
+          }
+          next();
+        });
+      }
+    },
     VitePWA({
       registerType: "autoUpdate",
       includeAssets: [
@@ -51,6 +62,14 @@ export default defineConfig({
       }
     })
   ],
+  build: {
+    rollupOptions: {
+      input: {
+        main: path.resolve(__dirname, "index.html"),
+        widget_dsr: path.resolve(__dirname, "w/dsr/index.html")
+      }
+    }
+  },
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./shared"),

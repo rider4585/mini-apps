@@ -3,6 +3,14 @@
   "outputDirectory": "dist",
   "rewrites": [
     {
+      "source": "/w/dsr",
+      "destination": "/w/dsr/index.html"
+    },
+    {
+      "source": "/w/dsr/(.*)",
+      "destination": "/w/dsr/index.html"
+    },
+    {
       "source": "/(.*)",
       "destination": "/index.html"
     }
