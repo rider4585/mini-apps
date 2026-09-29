@@ -1,0 +1,9 @@
+{
+  "name": "@apps/timesheet",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "xlsx-js-style": "^1.2.0"
+  }
+}

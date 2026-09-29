@@ -1,0 +1,75 @@
+{
+  "project": "DSR Mail Generator",
+  "root": "/Applications/MAMP/htdocs/Personal Projects/Status Mail Generator",
+  "app_dir": "app",
+  "updated_at": "2026-09-24",
+  "tasks": [
+    {
+      "id": "T01",
+      "title": "Project scaffolding & documentation",
+      "status": "completed",
+      "priority": "high",
+      "details": "Create tasks.json and context/ docs on project root so any LLM session can resume. Context docs: overview, requirements, architecture, UI design, PWA, storage, reminders, timesheet, status log."
+    },
+    {
+      "id": "T02",
+      "title": "Rebrand & redesign UI as a professional tool",
+      "status": "completed",
+      "priority": "high",
+      "details": "Rename system to 'DSR Mail Generator'. New professional theme (Inter font, slate/indigo). App shell with sidebar navigation: Daily Status (DSR) page and Timesheet page. Keep existing DSR features (Today / This Week / Custom Range, exclude dates, per-day inputs, same-activity, validation, Gmail draft generation)."
+    },
+    {
+      "id": "T03",
+      "title": "PWA support",
+      "status": "completed",
+      "priority": "high",
+      "details": "vite-plugin-pwa: manifest (name 'DSR Mail Generator', standalone display, indigo theme), service worker (autoUpdate, offline cache of app shell), app icons (192, 512, maskable 512, apple-touch 180, favicon), theme-color meta."
+    },
+    {
+      "id": "T04",
+      "title": "Local persistence (localStorage)",
+      "status": "completed",
+      "priority": "high",
+      "details": "Persist daily status report history keyed by date (YYYY-MM-DD) so the timesheet can be built from it. Also persist reminder schedule, draft settings, and timesheet profile."
+    },
+    {
+      "id": "T05",
+      "title": "Reminder / scheduling engine",
+      "status": "completed",
+      "priority": "high",
+      "details": "Recurring reminders: every Friday 18:00 (DSR) and every 2nd of month 18:00 (timesheet). After each fires, advance to next occurrence (next Friday; next month's 2nd). Use Notifications API (in-app + SW) and provide .ics export to import into phone calendar so the reminder also lands on the phone."
+    },
+    {
+      "id": "T06",
+      "title": "Timesheet generator (monthly)",
+      "status": "completed",
+      "priority": "high",
+      "details": "Template from 'Timesheet september 2026 (1).xlsx'. Keep top section (Name, Title, Department, Reporting Head, Client, Project, Location). Regenerate day rows for the selected month: Date, Day, Time In / Time Out (defaults), Billable Hours default '8 hours' (0 for leave dates), Non-billable and Comments empty, Work Activities pulled from submitted DSR history. Output .xlsx via xlsx-js-style. Email: To accounts@mobileprogramming.com, CC rohit.dudani@programming.com + suraksha.devadiga@programming.com, subject 'Timesheet Submission - Siemens - Raviraj Bugge - MM-YY', body per user-provided text."
+    },
+    {
+      "id": "T07",
+      "title": "DSR history wiring",
+      "status": "completed",
+      "priority": "medium",
+      "details": "When DSR drafts are generated, save each day's activity into history store so the timesheet can reference them."
+    },
+    {
+      "id": "T08",
+      "title": "Build, typecheck, PWA verification",
+      "status": "completed",
+      "priority": "high",
+      "details": "vite build, tsc --noEmit, dev-server smoke test, verify manifest + service worker register and offline caching."
+    }
+  ],
+  "constraints": [
+    "Gmail compose URLs cannot attach files - timesheet is downloaded as .xlsx and attached manually by the user in the opened Gmail draft.",
+    "True background scheduling on a phone requires native calendar/push; .ics export + in-app notifications are the supported mechanisms here.",
+    "Web worker / periodic background sync has limited support; reminders are evaluated while the PWA is open and on launch."
+  ],
+  "decisions": [
+    "Storage: localStorage (simple, synchronous, sufficient for text-sized data).",
+    "Excel generation: xlsx-js-style for styled output (SheetJS community drops styles).",
+    "Navigation: lightweight state-based routing (no react-router) - two pages.",
+    "Reminder scheduling: self-rescheduling computed events persisted in localStorage, Notifications API, plus .ics import for phone."
+  ]
+}
